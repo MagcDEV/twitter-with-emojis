@@ -4,7 +4,7 @@ import Head from "next/head";
 
 import { api, type RouterOutputs } from "~/utils/api";
 
-import React from 'react'
+import React, { useState } from 'react'
 import Image from "next/image";
 import dayjs from "dayjs";
 
@@ -16,13 +16,31 @@ dayjs.extend(realtiveTime);
 
 const CreatePostWizard = () => {
   const { user } = useUser()
+  const [input, setInput] = useState<string>("")
+
+  const ctx = api.useContext();
+
+  const { mutate, isLoading: isPosting } = api.posts.create.useMutation({
+    onSuccess: () => {
+      setInput("");
+      void ctx.posts.getAll.invalidate();
+    },
+  });
 
   if (!user) return null;
 
   return (
     <div className="flex gap-3">
       <Image width={56} height={56} className="h-14 w-14 rounded-full" src={user.profileImageUrl} alt="Profile Image" />
-      <input placeholder="Type some emojis!" className=" bg-transparent grow" />
+      <input
+        placeholder="Type some emojis!"
+        className=" bg-transparent grow"
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        disabled={isPosting}
+      />
+      <button onClick={() => mutate({ contend: input })}>Post</button>
     </div>
   )
 }
@@ -39,7 +57,7 @@ const PostView = (props: PostWithUser) => {
           <span>@{author.username}</span>
           <span className="font-thin">{` · ${dayjs(post.createdAt).fromNow()}`}</span>
         </div>
-        <span>
+        <span className="text-2xl">
           {post.content}
         </span>
       </div>
