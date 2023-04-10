@@ -51,7 +51,7 @@ const CreatePostWizard = () => {
           if (e.key === "Enter") {
             e.preventDefault();
             if (input !== "") {
-              mutate({content: input});
+              mutate({ content: input });
             }
           }
         }}
@@ -96,10 +96,10 @@ const Feed = () => {
   const { data, isLoading: postLoading } = api.posts.getAll.useQuery();
 
   if (postLoading) return (
-        <div className='absolute top-0 right-0 flex h-screen w-screen justify-center items-center'>
-          <Loading size={20} />
-        </div>
-  ) 
+    <div className='absolute top-0 right-0 flex h-screen w-screen justify-center items-center'>
+      <Loading size={20} />
+    </div>
+  )
 
   return (
     <div className="flex flex-col">
@@ -127,16 +127,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex justify-center h-screen">
-        <div className=" h-full w-full md:max-w-2xl border-x border-slate-400">
-          <div className="flex border-b border-slate-400 p-4">
-            <div className="">{!isSignedIn && (
-              <div className="flex justify-center">
-                <SignInButton />
-              </div>
-            )}{isSignedIn && <CreatePostWizard />}</div>
-          </div>
-          <Feed />
-        </div>
+        <div>Profile View</div>
       </main>
     </>
   );
