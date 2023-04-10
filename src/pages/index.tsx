@@ -1,11 +1,17 @@
-import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
+import { SignInButton, useUser } from "@clerk/nextjs";
 import { type NextPage } from "next";
 import Head from "next/head";
 
-import { api, RouterOutputs } from "~/utils/api";
+import { api, type RouterOutputs } from "~/utils/api";
 
 import React from 'react'
 import Image from "next/image";
+import dayjs from "dayjs";
+
+import realtiveTime from 'dayjs/plugin/relativeTime';
+import Loading from "~/components/Loading";
+
+dayjs.extend(realtiveTime);
 
 
 const CreatePostWizard = () => {
@@ -21,7 +27,7 @@ const CreatePostWizard = () => {
   )
 }
 
-type PostWithUser = RouterOutputs["post"]["getAll"][number]
+type PostWithUser = RouterOutputs["posts"]["getAll"][number]
 
 const PostView = (props: PostWithUser) => {
   const { post, author } = props;
@@ -31,7 +37,7 @@ const PostView = (props: PostWithUser) => {
       <div className="flex flex-col ml-4">
         <div className="flex gap-1 text-slate-300">
           <span>@{author.username}</span>
-          <span className="font-thin">{` · 1 hour ago`}</span>
+          <span className="font-thin">{` · ${dayjs(post.createdAt).fromNow()}`}</span>
         </div>
         <span>
           {post.content}
@@ -42,17 +48,29 @@ const PostView = (props: PostWithUser) => {
 
 }
 
+const Feed = () => {
+  const { data, isLoading: postLoading } = api.posts.getAll.useQuery();
+
+  if (postLoading) return <Loading />
+
+
+  return (
+    <div className="flex flex-col">
+      {data?.map((fullPost) => <PostView {...fullPost} key={fullPost.post.id} />)}
+    </div>
+
+  )
+}
+
+
 const Home: NextPage = () => {
-  const { data, isLoading } = api.post.getAll.useQuery();
 
-  const user = useUser();
+  const { isLoaded: userLoaded, isSignedIn } = useUser();
 
-  // console.log(user);
+  api.posts.getAll.useQuery();
 
-  if (isLoading) return <div>Loading...</div>;
-
-  if (!data) return <div>Something when wrong</div>;
-
+  // Return empty div if user isn't loeaded
+  if (!userLoaded) return <div />
 
   return (
     <>
@@ -64,16 +82,13 @@ const Home: NextPage = () => {
       <main className="flex justify-center h-screen">
         <div className=" h-full w-full md:max-w-2xl border-x border-slate-400">
           <div className="flex border-b border-slate-400 p-4">
-            <div className="">{!user.isSignedIn && (
+            <div className="">{!isSignedIn && (
               <div className="flex justify-center">
                 <SignInButton />
               </div>
-            )}{user.isSignedIn && <CreatePostWizard />}</div>
+            )}{isSignedIn && <CreatePostWizard />}</div>
           </div>
-          <div className="flex flex-col">
-            {data?.map((fullPost) => <PostView {...fullPost} key={fullPost.post.id} />)}
-          </div>
-
+          <Feed />
         </div>
       </main>
     </>
