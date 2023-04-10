@@ -47,8 +47,26 @@ const CreatePostWizard = () => {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         disabled={isPosting}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            if (input !== "") {
+              mutate({content: input});
+            }
+          }
+        }}
       />
-      <button className=" ml-32" onClick={() => mutate({ content: input })}>Post</button>
+      {input !== "" && !isPosting && (
+        <button
+          className=" ml-32" onClick={() => mutate({ content: input })}>
+          Post
+        </button>
+      )}
+      {true && (
+        <div className="flex items-center justify-center">
+          <Loading size={4} />
+        </div>
+      )}
     </div>
   )
 }
@@ -77,7 +95,11 @@ const PostView = (props: PostWithUser) => {
 const Feed = () => {
   const { data, isLoading: postLoading } = api.posts.getAll.useQuery();
 
-  if (postLoading) return <Loading />
+  if (postLoading) return (
+        <div className='absolute top-0 right-0 flex h-screen w-screen justify-center items-center'>
+          <Loading size={20} />
+        </div>
+  ) 
 
   return (
     <div className="flex flex-col">
