@@ -13,14 +13,14 @@ import {
 } from "~/server/api/trpc";
 import { filterUserForClient } from "~/server/helpers/filterUserForClient";
 
-const addUserDataToPost = async (posts: Post[]) => {
+const addUserDataToPosts = async (posts: Post[]) => {
+  const userId = posts.map((post) => post.authorId);
   const users = (
     await clerkClient.users.getUserList({
-      userId: posts.map((post) => post.authorId),
-      limit: 100,
+      userId: userId,
+      limit: 110,
     })
-  ).filter(filterUserForClient);
-
+  ).map(filterUserForClient);
   return posts.map((post) => {
     const author = users.find((user) => user.id === post.authorId);
 
@@ -47,13 +47,25 @@ const ratelimit = new Ratelimit({
 });
 
 export const postRouter = createTRPCRouter({
+  getById: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const post = await ctx.prisma.post.findUnique({
+        where: { id: input.id },
+      });
+
+      if (!post) throw new TRPCError({ code: "NOT_FOUND" });
+
+      return (await addUserDataToPosts([post]))[0];
+    }),
+
   getAll: publicProcedure.query(async ({ ctx }) => {
     const posts = await ctx.prisma.post.findMany({
       take: 100,
       orderBy: [{ createdAt: "desc" }],
     });
 
-    return addUserDataToPost(posts);
+    return addUserDataToPosts(posts);
   }),
 
   getPostByUserId: publicProcedure
@@ -63,14 +75,15 @@ export const postRouter = createTRPCRouter({
       })
     )
     .query(({ ctx, input }) =>
-      ctx.prisma.post.findMany({
-        where: {
-          authorId: input.userId,
-        },
-        take: 100,
-        orderBy: [{ createdAt: "desc" }],
-      })
-      .then(addUserDataToPost)
+      ctx.prisma.post
+        .findMany({
+          where: {
+            authorId: input.userId,
+          },
+          take: 100,
+          orderBy: [{ createdAt: "desc" }],
+        })
+        .then(addUserDataToPosts)
     ),
 
   create: privateProcedure

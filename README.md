@@ -1,28 +1,97 @@
-# Create T3 App
+<a name="readme-top"></a>
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/magcdev/twitter-with-emojis">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
 
-## What's next? How do I make an app with this?
+<h3 align="center">Twitter With Emojis</h3>
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+  <p align="center">
+    project_description
+    <br />
+    <br />
+    <a href="https://twitter-with-emojis.vercel.app/">View Demo</a>
+  </p>
+</div>
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
 
-## Learn More
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+  </ol>
+</details>
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-## How do I deploy this?
+[![Product Name Screen Shot][product-screenshot]](https://twitter-with-emojis.vercel.app/)
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+A small twitter clone project but with one change you can only use emojis, the project handles authentication using Clerk, the frontend using Nextjs and Tailwindcss, Trpc in the backend and Prisma as ORM, it uses a MySql database hosted on planetscale. To use the app you just need a Github or Gmail account to login and you are ready to go. You can post emojis, you can click on a user's name to see all their posts and you can click on the post content to go to the detail. The application is uploaded to vercel you can test it whenever you want or if you want to run it local you can ask me for the env variables.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+### Built With
+
+* [![Next][Next.js]][Next-url]
+* [![React][React.js]][React-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+### Prerequisites
+
+You need to have Node and git installed in your machine to run this app
+
+### Installation
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/MagcDEV/twitter-with-emojis.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. And run the app
+   ```sh
+   npm run dev
+   ```
+NOTE: You need the env variables to run the app localy
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- CONTACT -->
+## Contact
+
+Your Name - [@twitter_handle](https://twitter.com/magcdev) - manuel117g@gmail.com
+
+Project Link: [https://github.com/magcdev/twitter-with-emojis](https://github.com/magcdev/twitter-with-emojis)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next-url]: https://nextjs.org/
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
