@@ -39,7 +39,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-A small twitter clone project but with one change you can only use emojis, the project handles authentication using Clerk, the frontend using Nextjs and Tailwindcss, Trpc in the backend and Prisma as ORM, it uses a MySql database hosted on planetscale. To use the app you just need a Github or Gmail account to login and you are ready to go. You can post emojis, you can click on a user's name to see all their posts and you can click on the post content to go to the detail. The application is uploaded to vercel you can test it whenever you want or if you want to run it local you can ask me for the env variables.
+A small twitter clone project but with one change you can only use emojis, the project handles authentication using Clerk, the frontend using Nextjs and Tailwindcss, Trpc in the backend and Prisma as ORM, it uses a MySql database hosted on planetscale. To use the app you just need a Github account to login and you are ready to go. You can post emojis, you can click on a user's name to see all their posts and you can click on the post content to go to the detail. The application is uploaded to vercel you can test it whenever you want or if you want to run it local you can ask me for the env variables.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
