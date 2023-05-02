@@ -3,10 +3,6 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/magcdev/twitter-with-emojis">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
 <h3 align="center">Twitter With Emojis</h3>
 
   <p align="center">
@@ -42,8 +38,6 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://twitter-with-emojis.vercel.app/)
 
 A small twitter clone project but with one change you can only use emojis, the project handles authentication using Clerk, the frontend using Nextjs and Tailwindcss, Trpc in the backend and Prisma as ORM, it uses a MySql database hosted on planetscale. To use the app you just need a Github or Gmail account to login and you are ready to go. You can post emojis, you can click on a user's name to see all their posts and you can click on the post content to go to the detail. The application is uploaded to vercel you can test it whenever you want or if you want to run it local you can ask me for the env variables.
 
@@ -85,7 +79,7 @@ NOTE: You need the env variables to run the app localy
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/magcdev) - manuel117g@gmail.com
+Manuel Guevara - [@MagcDev](https://twitter.com/magcdev) - manuel117g@gmail.com
 
 Project Link: [https://github.com/magcdev/twitter-with-emojis](https://github.com/magcdev/twitter-with-emojis)
 
